@@ -80,7 +80,9 @@ void writeAvgFile(const std::vector<Line>& lines) {
 
 	long average = lines.at(0).getSum() / lines.size();
 
-	for (int i = 0; i < lines.size(); i++) if (lines.at(i).getValue() > average) avg << lines.at(i).getLine() << "\n";
+	for (int i = 0; i < lines.size(); i++) {
+		if (lines.at(i).getValue() > average) avg << lines.at(i).getLine() << "\n";
+	}
 
 	avg.close();
 }
