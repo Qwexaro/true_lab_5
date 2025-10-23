@@ -75,7 +75,7 @@ std::vector<Line> splitWithStreams() {
 	return lines_split;
 }
 
-void printAvgFile(const std::vector<Line>& lines) {
+void writeAvgFile(const std::vector<Line>& lines) {
 	std::ofstream avg("more_than_avg.txt");
 
 	long average = lines.at(0).getSum() / lines.size();
@@ -127,5 +127,5 @@ int main() {
 	
 	std::time_t start_find = clock(); searchName(lines, search); std::cout << "Time: " << (clock() - start_find) / 1000.0 << "sec\n";
 	
-	std::time_t start_avg = clock(); printAvgFile(lines); std::cout << "Time: " << (clock() - start_avg) / 1000.0 << "sec\n";
+	std::time_t start_avg = clock(); writeAvgFile(lines); std::cout << "Time: " << (clock() - start_avg) / 1000.0 << "sec\n";
 }
