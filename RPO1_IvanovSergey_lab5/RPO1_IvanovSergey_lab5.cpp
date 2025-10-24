@@ -31,6 +31,8 @@ public:
 	friend std::istream& operator>>(std::istream& in, Line& line);
 };
 
+long Line::sum_value = 0;
+
 std::istream& operator>> (std::istream& in, Line& line) {
 	in >> line.name >> line.value >> line.mod;
 
@@ -39,15 +41,12 @@ std::istream& operator>> (std::istream& in, Line& line) {
 	return in;
 }
 
-long Line::sum_value = 0;
-
 void splitByObjects(std::vector<Line>& lines_split, std::string filename) {
 	std::ifstream file(filename);
 
-	while (!file == '\0') {
-		Line line;
-		
-		file >> line;
+	Line line;
+	
+	while (file >> line) {
 		
 		mutex.lock();
 		
@@ -78,7 +77,7 @@ std::vector<Line> splitWithStreams() {
 void writeAvgFile(const std::vector<Line>& lines) {
 	std::ofstream avg("more_than_avg.txt");
 
-	long average = lines.at(0).getSum() / lines.size();
+	size_t average = lines.at(0).getSum() / lines.size();
 
 	for (int i = 0; i < lines.size(); i++) {
 		if (lines.at(i).getValue() > average) avg << lines.at(i).getLine() << "\n";
